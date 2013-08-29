@@ -108,6 +108,9 @@ class HipChat extends Adapter
         mention_name = connector.mention_name
         regex = new RegExp "^@#{mention_name}\\b", "i"
         message = message.replace regex, "#{mention_name}: "
+        @logger.debug "received message: #{message}"
+        @logger.debug "from: #{from}"
+        @logger.debug "robot.brain.userForName(from): #{@robot.brain.userForName(from)}"
         handleMessage
           getAuthor: => @robot.brain.userForName(from) or {}
           message: message
